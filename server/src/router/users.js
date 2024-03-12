@@ -15,7 +15,7 @@ router.post("/register", async (req, res)=>{
             return res.status(409).send("Username already exists");
         }
         const hashedPassword = await bcrypt.hash(password, 10)
-        console.log("registerd hashedPassword = " + hashedPassword);
+        console.log("registered hashedPassword = " + hashedPassword);
         const newUser = new UserModel({
             username,
             password: hashedPassword,
@@ -52,11 +52,6 @@ router.post("/login", async (req, res)=>{
             token: token,
             message: "User Login successfully",});
 
-        
-        
-
-        // const username = req.body.username;
-        // const password = req.body.password;
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
