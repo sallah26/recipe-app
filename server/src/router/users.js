@@ -5,29 +5,34 @@ import { UserModel } from "../model/user.js";
 
 const router = express.Router();
 
-router.post("/register", async (req, res)=>{
-    const {username, password} = req.body;
-    
+router.post("/register", async (req, res) => {
+    const { regUsername, regPassword } = req.body;
+
     try {
-        const { username, password } = req.body;
-        const existingUser = await UserModel.findOne({ username });
+        const existingUser = await UserModel.findOne({ username: regUsername });
+
         if (existingUser) {
-            return res.status(409).send("Username already exists");
+            return res.status(409).send(`Username ${regUsername} already exists`);
         }
-        const hashedPassword = await bcrypt.hash(password, 10)
-        console.log("registered hashedPassword = " + hashedPassword);
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(regPassword, saltRounds);
+
+        console.log("Registered hashedPassword = " + hashedPassword);
+
         const newUser = new UserModel({
-            username,
+            username: regUsername,
             password: hashedPassword,
         });
+
         await newUser.save();
+
         res.status(201).send("User registered successfully");
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
     }
 });
-
 router.post("/login", async (req, res)=>{
     const {username, password} = req.body;
     

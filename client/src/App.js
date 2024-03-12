@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, useNavigate} from "react-router-dom";
 import Home from './pages/Home';
 import Auth from './pages/Auth';
 
