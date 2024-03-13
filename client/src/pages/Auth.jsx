@@ -48,8 +48,14 @@ const Auth = () => {
       if(regPassword !== regConfirmPassword) return setErr("Passwords do not match")
       try {
           await axios.post("http://localhost:5000/auth/login",  { username, password })
+          .then((res)=> {
+            console.log(res.data);
+            localStorage.setItem('token', res.data.token);
+            //console.log(localStorage.getItem('token'));
           alert("Your are Logged in completed!")
+          console.log(res);
           navigate("/")
+          })
       } catch (error) {
           console.log(error);
           // console.log(error.message);
@@ -65,7 +71,7 @@ const Auth = () => {
   };
   return (
     <section>{!showRegiseter ? (
-       <div className="min-w-[500px] border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
+      <div className="min-w-[500px] border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
       <p className='text-xl font-semibold'>Login With Your Username</p>
       <p className='text-[20px] text-red-600'>{err}</p>
       <form action="" className='flex flex-col w-full gap-4'>
@@ -82,7 +88,6 @@ const Auth = () => {
                 <BsEyeFill className='cursor-pointer text-slate-800 right-0 absolute mr-4' size={22} onClick={()=>{setShowPassword(!showPassword)}}/>
               )
             }
-        
         </div>
         <button onClick={handleLogin} className='bg-teal-600 outline-0 border-[1.5px] shadow-lg shadow-teal-400 rounded-full border-slate-700 w-full h-10 px-10 text-white'>LOG IN</button>
       </form>
