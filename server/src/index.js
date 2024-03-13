@@ -11,9 +11,6 @@ app.use(cors());
 app.use(express.json());
 app.use("/auth", userRouter);
 
-
-
-
 mongoose.connect(DB_URL).then(()=>{
     console.log( "MongoDB Connected Successfully");
 }).catch((err)=>console.error("error with ur db sallah " + err));

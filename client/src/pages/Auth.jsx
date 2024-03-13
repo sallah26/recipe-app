@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaLock, FaUnlockAlt, FaUserAlt } from "react-icons/fa";
 import { BsEyeFill } from "react-icons/bs";
 import { BsEyeSlashFill } from "react-icons/bs";
-
+import {useCookies} from "react-cookie"
 
 const Auth = () => {
   const [username, setUsername] = useState("");
@@ -15,10 +15,9 @@ const Auth = () => {
   const [regPassword, setRegPassword] = useState("");
   const [regConfirmPassword, setRegConfirmPassword] = useState("");
   const [showRegiseter, setShowRegiseter] = useState(false);
-
   const [err, setErr] = useState("");
   const navigate = useNavigate();
-
+  const [_, setCookies] = useCookies(["access_token"])
   const handleRegistration = async (e)=>{
         e.preventDefault();
         if(regPassword !== regConfirmPassword) return setErr("Passwords do not match!");
@@ -38,6 +37,7 @@ const Auth = () => {
               default:
                 setErr("Internal Server Error");
                 break;
+
             }
             console.log(error.message);
         }
@@ -50,6 +50,7 @@ const Auth = () => {
           await axios.post("http://localhost:5000/auth/login",  { username, password })
           .then((res)=> {
             console.log(res.data);
+            setCookies("access_token", res.data.token)
             localStorage.setItem('token', res.data.token);
             //console.log(localStorage.getItem('token'));
           alert("Your are Logged in completed!")
