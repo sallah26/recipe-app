@@ -12,7 +12,7 @@ const Navbar = () => {
     navigate("/auth");
   }
   return (
-    <div className="flex left-0 justify-center absolute  top-10 w-full">
+    <div className="flex left-0 justify-center   top-10 w-full">
     <header className=' p-10 flex justify-center gap-7 text-2xl'>
       <Link to={"/"}>Home</Link>
       <Link to={"/"}>Add Recipes</Link>
