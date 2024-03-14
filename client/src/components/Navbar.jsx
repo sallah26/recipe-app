@@ -15,7 +15,7 @@ const Navbar = () => {
     <div className="flex left-0 justify-center   top-10 w-full">
     <header className=' p-10 flex justify-center gap-7 text-2xl'>
       <Link to={"/"}>Home</Link>
-      <Link to={"/"}>Add Recipes</Link>
+      <Link to={"/addrecipe"}>Add Recipes</Link>
       <Link to={"/"}>Saved Recipes</Link>
       {!cookie.access_token ? (
         <button onClick={logout}>Log out</button>

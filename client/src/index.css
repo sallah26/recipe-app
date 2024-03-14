@@ -20,3 +20,6 @@ code {
 input::placeholder {
   color: #424040; /* Set the color you want for the placeholder text */
 }
+textarea::placeholder {
+  color: #424040; /* Set the color you want for the placeholder text */
+}

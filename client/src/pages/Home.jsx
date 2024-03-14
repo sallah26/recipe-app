@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import axios from "axios";
 import Loading from "../components/Loading";
-
+import {useNavigate} from "react-router-dom";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLoading(true)
@@ -25,7 +26,7 @@ const Home = () => {
   let ke = -1;
   return (
     <div className="App">
-      <Navbar />
+      <Navbar />()
     {loading && <Loading />}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 justify-center">
       {recipes.map((recipe)=>{
@@ -45,6 +46,7 @@ const Home = () => {
               </div>
               <p className="">Total Cooking Time : {recipe.cookingTime}</p>
             </div>
+            <button onClick={()=> {navigate(`/details/${recipe._id}`)}}>See the Details</button>
           </div>
         )
       })}
