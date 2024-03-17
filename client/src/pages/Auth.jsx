@@ -71,6 +71,7 @@ const Auth = () => {
       }
   };
   return (
+    <article className='min-w-full min-h-[100vh] bg-teal-800'>
     <section>{!showRegiseter ? (
       <div className="min-w-[500px] border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
       <p className='text-xl font-semibold'>Login With Your Username</p>
@@ -129,7 +130,7 @@ const Auth = () => {
     )}
      
     </section>
-    
+    </article>
   )
 }
 

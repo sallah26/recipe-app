@@ -7,7 +7,6 @@ import {useNavigate} from "react-router-dom";
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -16,37 +15,28 @@ const Home = () => {
     .then((res) => {
       setRecipes(res.data)
       setLoading(false);
-      console.log(res.data);
-      
+     
     }).catch((err)=>{
       console.log(err);
-    })
-    
-  }, [])
+    }
+    );    
+  }, []);
+
   let ke = -1;
   return (
-    <div className="App">
-      <Navbar />()
+    <div className="">
+      <Navbar />
     {loading && <Loading />}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 justify-center">
       {recipes.map((recipe)=>{
         return (
-          <div key={recipe._id} className="max-w-[400px] border-[2px] rounded-xl ">
-            <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className='w-full h-60 '/>
+          <div key={recipe._id} className="maindiv elem  max-w-[350px] border-[1px] rounded-xl bg-stone-200">
+            <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className='max-h-[300px] w-full rounded-ss-xl rounded-se-xl'/>
             <div className='flex flex-col gap-5 p-4'>
-              <p className="text-2xl text-green-600 font-semibold">{recipe.name}</p>
-              <p className="">Ingredients :</p>
-              <div className='flex gap-3'>
-                {recipe.ingredients.map((ingr)=>{
-                  ke = ke + 1;
-                  return (
-                    <p key={ke}>{ingr}</p>
-                    )
-                  })}
-              </div>
-              <p className="">Total Cooking Time : {recipe.cookingTime}</p>
+              <p className="text-[19px] text-slate-800 font-semibold">{recipe.name}</p>
             </div>
-            <button onClick={()=> {navigate(`/details/${recipe._id}`)}}>See the Details</button>
+            <button className='mainbtn w-5/6 h-10 bg-stone-800 text-white rounded-xl border-2 border-slate-500 ' onClick={()=> {navigate(`/details/${recipe._id}`)}}>Preview the recipe</button>
+            <div className='overl'></div>
           </div>
         )
       })}

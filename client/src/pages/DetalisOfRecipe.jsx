@@ -2,12 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../components/Loading';
+import { FaChevronLeft, FaMapMarker } from 'react-icons/fa';
+import Navbar from '../components/Navbar';
+
 
 const DetailsOfRecipe = () => {
   const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true)
+    axios.get('http://localhost:5000/recipe/')
+    .then((res) => {
+      setRecipes(res.data)
+      setLoading(false);
+     
+    }).catch((err)=>{
+      console.log(err);
+    }
+    );    
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -24,29 +41,67 @@ const DetailsOfRecipe = () => {
       });
   }, [id]);
 
+  const colures = ["text-teal-500","text-green-500","text-yellow-500","text-blue-600","text-red-500","text-orange-400","text-red-400"];
+
   return (
-    <div>
-      {loading ? (
-        <Loading />
-      ) : recipe ? (
-        <div className="max-w-[400px] border-[2px] rounded-xl">
-          <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className="w-full h-60" />
-          <div className="flex flex-col gap-5 p-4">
-            <p className="text-2xl text-green-600 font-semibold">{recipe.name}</p>
-            <p>Ingredients:</p>
-            <div className="flex flex-wrap gap-3">
-              {recipe.ingredients.map((ingr, index) => (
-                <p key={index}>{ingr}</p>
-              ))}
+      <div className='flex flex-col items-center'>
+        <FaChevronLeft size={30} onClick={()=>navigate('/')} className="h-20 absolute left-10 top-5 text-slate-800"/>
+        <div>
+          {loading ? (
+            <Loading />
+          ) : recipe && (
+            <div className='max-w-[1300px] bg-stone-200 text-stone-800  border-slate-400 shadow-xl my-20 border-[1px] p-10 rounded-xl'>
+            <div className="flex flex-col lg:flex-row ">
+              <div className="w-full lg:w-1/2 flex flex-col gap-8 p-4 items-start text-start">
+                <p className="text-4xl text-stone-900 font-bold">{recipe.name}</p>
+                <div className="flex flex-col gap-2 justify-center">
+                <p className="text-xl font-semibold">Ingredients:</p>
+                  {recipe.ingredients.map((ingr, index) => (
+                    <div className={`flex gap-2 items-center ${colures[index]}`}>
+                      <FaMapMarker /> <p key={index}>{ingr}</p>
+                    </div>
+                  ))}{" "}
+                </div>
+                <p className="text-xl font-semibold">Total Cooking Time: <span className="text-yellow-800">{recipe.cookingTime} Mins</span></p>
+                <p className="text-md text-justify"><span  className="text-xl font-semibold">Instructions to make it </span><br /> {recipe.instructions}</p>
+              </div>
+              <div className='w-full lg:w-1/2 flex flex-col gap-3'>
+                <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className="h-80 rounded-3xl" />
+                <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className="h-80 rounded-3xl" />
+
+              </div>
             </div>
-            <p>Total Cooking Time: {recipe.cookingTime}</p>
-          </div>
+              <div>
+                <p>Give it rate!</p>
+              </div>
+            <div className="flex flex-col lg:flex-row">
+              <button onClick={()=>{navigate(`/updaterecipe/${recipe._id}`)}} className='m-10 h-10 w-1/2 bg-green-600 text-white font-bold rounded-full border-2'>Edit the recipe</button>
+              <button onClick={()=>{navigate(`/deleterecipe/${recipe._id}`)}} className='m-10 h-10 w-1/2 bg-red-600 text-black font-bold rounded-full border-2'>Delete the recipe</button>
+            </div>
+            </div>
+          )}
         </div>
-      ) : (
-        <p>No recipe found</p>
-      )}
-      <button onClick={()=>{navigate(`/deleterecipe/${recipe._id}`)}}>Delete the recipe</button>
-    </div>
+
+        <p className="text-4xl text-stone-900 font-bold">Here Explore Other available Recipes!</p>
+            
+        {/* The whole page is here */}
+        {loading && <Loading />}
+        <div className="my-20 mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 justify-center">
+          {recipes.map((recipe)=>{
+            return (
+              <div key={recipe._id} className="maindiv elem  max-w-[350px] border-[1px] rounded-xl bg-stone-200">
+                <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className='max-h-[300px] w-full rounded-ss-xl rounded-se-xl'/>
+                <div className='flex flex-col gap-5 p-4'>
+                  <p className="text-[19px] text-slate-800 font-semibold">{recipe.name}</p>
+                  <button className='mainbtn w-5/6 h-10 bg-stone-800 text-white rounded-xl border-2 border-slate-500 ' onClick={()=> {navigate(`/details/${recipe._id}`)}}>Preview the recipe</button>
+                  <div className='overl'></div>
+                </div>
+              </div>
+            )
+          })}
+          
+        </div>
+      </div>
   );
 };
 

@@ -23,3 +23,68 @@ input::placeholder {
 textarea::placeholder {
   color: #424040; /* Set the color you want for the placeholder text */
 }
+
+
+
+.maindiv img{
+  z-index: 0;
+  height: auto;
+  width: 100%;
+
+}
+.maindiv{
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  /* margin: 0; */
+  /* background: (1,1,1,0.4); */
+  transition: background cubic-bezier(0.39, 0.575, 0.565, 1) ease-in-out;
+}
+
+.overl{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.1));
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 300ms ease-in-out;
+
+}
+
+.maindiv:hover .overl{
+  opacity: 1;
+  /* background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)); */
+}
+.mainbtn{
+  opacity: 0;
+  z-index: 4;
+  position: absolute;
+  bottom: 30%;
+  width: 70%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  transition: transform 300ms ease-in-out, opacity 500ms ease-in-out;
+
+}
+
+
+/* 
+.mainbtn{
+  display: none;
+  position: absolute;
+  transition: transform 3s ease-in-out;
+  
+} */
+.maindiv:hover .mainbtn{
+  /* background-color: rgb(123, 222, 212, .5); */
+  transform: translate(-50%, 0);
+  opacity: 1;
+  /* display: flex; */
+  /* margin: auto; */
+  /* text-align: center; */
+  /* transform: translateY(-50px) ; */
+  
+}

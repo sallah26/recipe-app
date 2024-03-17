@@ -68,6 +68,7 @@ router.put("/:id", async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
+        await RecipeModel.findByIdAndDelete(id);
         return res.status(200).send('Recipe deleted successfully');
     } catch (error) {
         console.log(error.message);
