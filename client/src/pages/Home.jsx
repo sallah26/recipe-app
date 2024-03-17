@@ -24,13 +24,12 @@ const Home = () => {
 
   let ke = -1;
   return (
-    <div className="">
-      <Navbar />
+    <div className="py-20 flex justify-center">
     {loading && <Loading />}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 justify-center">
       {recipes.map((recipe)=>{
         return (
-          <div key={recipe._id} className="maindiv elem  max-w-[350px] border-[1px] rounded-xl bg-stone-200">
+          <div key={recipe._id} className="maindiv elem shadow-2xl  max-w-[350px] border-[1px] rounded-xl ">
             <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className='max-h-[300px] w-full rounded-ss-xl rounded-se-xl'/>
             <div className='flex flex-col gap-5 p-4'>
               <p className="text-[19px] text-slate-800 font-semibold">{recipe.name}</p>

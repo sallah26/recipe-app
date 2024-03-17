@@ -6,10 +6,12 @@ import AddRecipe from './pages/AddRecipe';
 import DeleteRecipe from './pages/DeleteRecipe';
 import UpdateRecipe from './pages/UpdateRecipe';
 import DetalisOfRecipe from './pages/DetalisOfRecipe';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App flex items-center justify-center min-h-screen bg-stone-100 text-white">
+    <div className="App flex flex-col justify-center  bg-stone-100 text-white">
+      <Navbar />
       <Routes>
           <Route path='/' element= {<Home />}/>
           <Route path='/addrecipe' element= {<AddRecipe />}/>

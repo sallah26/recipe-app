@@ -12,19 +12,19 @@ const Navbar = () => {
     navigate("/auth");
   }
   return (
-    <div className="flex left-0 justify-center   top-10 w-full">
-    <header className=' p-10 flex justify-center gap-7 text-2xl'>
-      <Link to={"/"}>Home</Link>
-      <Link to={"/addrecipe"}>Add Recipes</Link>
-      <Link to={"/"}>Saved Recipes</Link>
-      {!cookie.access_token ? (
-        <button onClick={logout}>Log out</button>
-        ) : (
-          <Link to={"/auth"}>Login</Link>
-      )
-      }
+    <header className='p-4 md:p-7 md:px-20  min-w-full  bg-stone-100 px-10 flex justify-between gap-7  text-slate-800'>
+      <Link to={"/"} className='text-2xl font-bold'>Home</Link>
+      <div className='flex items-center justify-center text-md gap-8 '>
+        <Link to={"/addrecipe"}>Add Recipes</Link>
+        <Link to={"/"}>Favorite Recipes</Link>
+        {!cookie.access_token ? (
+          <button className="p-1 font-semibold px-4 bg-transparent border-2 border-slate-900 rounded-full" onClick={logout}>Log out</button>
+          ) : (
+            <Link to={"/auth"} className="p-1 font-semibold px-4 bg-transparent border-2 border-green-600 rounded-full">Login</Link>
+            )
+          }
+      </div>
     </header>
-    </div>
   )
 }
 
