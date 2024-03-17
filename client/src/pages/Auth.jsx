@@ -45,12 +45,9 @@ const Auth = () => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/auth/login", { username, password });
-      console.log(res.data);
       setCookies("access_token", res.data.token);
       localStorage.setItem('token', res.data.token);
       alert("You are Logged in completed!");
-      console.log(res.data);
-      console.log(res.data.userId);
       localStorage.setItem('userID', res.data.userId);
       navigate("/");
     } catch (error) {

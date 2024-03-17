@@ -4,6 +4,7 @@ import axios from 'axios';
 import Loading from '../components/Loading';
 import { FaChevronLeft, FaMapMarker } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
+import { useGetUserId } from '../hooks/useGetUserId';
 
 
 const DetailsOfRecipe = () => {
@@ -12,6 +13,9 @@ const DetailsOfRecipe = () => {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [owner, setOwner] = useState(false);
+  const userId = useGetUserId();
+
 
   useEffect(() => {
     setLoading(true)
@@ -32,6 +36,15 @@ const DetailsOfRecipe = () => {
       .get(`http://localhost:5000/recipe/${id}`)
       .then((res) => {
         setRecipe(res.data);
+        var owner = res.data.userOwner;
+        if (owner === userId){
+          setOwner(true);
+        } else{
+          setOwner(false);
+        }
+        console.log(res.data);
+        console.log(owner === userId);
+
       })
       .catch((err) => {
         console.error('Error fetching recipe:', err);
@@ -73,10 +86,12 @@ const DetailsOfRecipe = () => {
               <div>
                 <p>Give it rate!</p>
               </div>
-            <div className="flex flex-col lg:flex-row">
-              <button onClick={()=>{navigate(`/updaterecipe/${recipe._id}`)}} className='m-10 h-10 w-1/2 bg-green-600 text-white font-bold rounded-full border-2'>Edit the recipe</button>
-              <button onClick={()=>{navigate(`/deleterecipe/${recipe._id}`)}} className='m-10 h-10 w-1/2 bg-red-600 text-black font-bold rounded-full border-2'>Delete the recipe</button>
-            </div>
+              {owner && (
+                <div className="flex flex-col lg:flex-row">
+                  <button onClick={()=>{navigate(`/updaterecipe/${recipe._id}`)}} className='m-10 h-10 w-1/2 bg-green-600 text-white font-bold rounded-full border-2'>Edit the recipe</button>
+                  <button onClick={()=>{navigate(`/deleterecipe/${recipe._id}`)}} className='m-10 h-10 w-1/2 bg-red-600 text-black font-bold rounded-full border-2'>Delete the recipe</button>
+                </div>
+              )}
             </div>
           )}
         </div>

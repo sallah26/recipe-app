@@ -6,9 +6,12 @@ import { FaImages } from "react-icons/fa";
 import { IoTimeSharp } from "react-icons/io5";
 import Loading from '../components/Loading';
 import { useNavigate} from "react-router-dom"
+import { useGetUserId } from '../hooks/useGetUserId.js';
 
 const AddRecipe = () => {
-    const [recipe, setRecipe] = useState({name: "", ingredients: [], cookingTime: 0, imgUrl: "", userOwner: "65f215fb3376d02a96ad9f0a",  instructions: ""});;
+    const userId = useGetUserId();
+    console.log(userId);
+    const [recipe, setRecipe] = useState({name: "", ingredients: [], cookingTime: 0, imgUrl: "", userOwner: userId,  instructions: ""});;
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
    

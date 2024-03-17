@@ -20,10 +20,7 @@ router.get("/", async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        
-        console.log(req.body);
         const recipe = await RecipeModel.findById(id);
-        // check the user if it is the owner of this recipe
         return res.status(200).json(recipe);
     } catch (error) {
         res.status(500).send({ message: error.message })

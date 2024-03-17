@@ -88,3 +88,79 @@ textarea::placeholder {
   /* transform: translateY(-50px) ; */
   
 }
+
+
+.hamburger-menu{
+  cursor: pointer;
+ 
+}
+.hamburger-menu div span{
+  height: 3px;
+  width: 30px;
+  /* position: absolute; */
+  background-color: rgb(0, 0, 0);
+  
+}
+
+.hamburger-menu div .first{
+ 
+}
+
+.hamburger-menu div .second{
+  margin-top: 8px;
+}
+.hamburger-menu div .third{
+  margin-top: 8px;
+ 
+}
+
+
+
+
+/* .show-menu {
+  position: relative;
+
+} */
+
+.show-menu{
+  margin-top: 0px;
+  margin-right: 30px;
+}
+
+.show-menu .first{
+  background-color: blue;
+  position: absolute;
+  transform: rotate(45deg);
+  transition-duration: 300ms;
+}
+
+.show-menu .second{
+  background-color: rgb(115, 115, 187);
+  position: absolute;
+  display: none;
+}
+.show-menu .third{
+  background-color: blue;
+  position: absolute;
+  margin-top: 0px!important;
+  transform: rotate(315deg);
+  transition-duration: 300ms;
+  /* top: 28px; */
+ 
+}
+
+
+
+.show-hamburger{
+  width: 100%;
+  min-height: 500px;
+  background-color: #242222;
+  color: aliceblue;
+  z-index: 9999;
+  position: fixed;
+  top: 100px;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+  align-items: center;
+}
