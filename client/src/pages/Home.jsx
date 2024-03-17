@@ -15,7 +15,6 @@ const Home = () => {
     .then((res) => {
       setRecipes(res.data)
       setLoading(false);
-     
     }).catch((err)=>{
       console.log(err);
     }

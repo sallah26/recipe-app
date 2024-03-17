@@ -49,7 +49,9 @@ const Auth = () => {
       setCookies("access_token", res.data.token);
       localStorage.setItem('token', res.data.token);
       alert("You are Logged in completed!");
-      console.log(res);
+      console.log(res.data);
+      console.log(res.data.userId);
+      localStorage.setItem('userID', res.data.userId);
       navigate("/");
     } catch (error) {
       console.log(error);

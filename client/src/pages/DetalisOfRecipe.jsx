@@ -92,7 +92,7 @@ const DetailsOfRecipe = () => {
                 <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className='max-h-[300px] w-full rounded-ss-xl rounded-se-xl'/>
                 <div className='flex flex-col gap-5 p-4'>
                   <p className="text-[19px] text-slate-800 font-semibold">{recipe.name}</p>
-                  <button className='mainbtn w-5/6 h-10 bg-stone-800 text-white rounded-xl border-2 border-slate-500 ' onClick={()=> {navigate(`/details/${recipe._id}`)}}>Preview the recipe</button>
+                  <button className='mainbtn w-5/6 h-10 bg-stone-800 text-white rounded-full border-2 border-slate-500 ' onClick={()=> {navigate(`/details/${recipe._id}`)}}>Preview the recipe</button>
                   <div className='overl'></div>
                 </div>
               </div>
