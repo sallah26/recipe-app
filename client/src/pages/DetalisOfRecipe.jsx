@@ -67,7 +67,7 @@ const DetailsOfRecipe = () => {
               <div className="w-full lg:w-1/2 flex flex-col gap-8 p-4 items-start text-start">
                 <p className="text-4xl text-stone-900 font-bold">{recipe.name}</p>
                 <div className="flex flex-col gap-2 justify-center">
-                <p className="text-xl font-semibold">Ingredients:</p>
+                  <p className="text-xl font-semibold">Ingredients:</p>
                   {recipe.ingredients.map((ingr, index) => (
                     <div className={`flex gap-2 items-center ${colures[index]}`}>
                       <FaMapMarker /> <p key={index}>{ingr}</p>
@@ -75,7 +75,14 @@ const DetailsOfRecipe = () => {
                   ))}{" "}
                 </div>
                 <p className="text-xl font-semibold">Total Cooking Time: <span className="text-yellow-800">{recipe.cookingTime} Mins</span></p>
-                <p className="text-md text-justify"><span  className="text-xl font-semibold">Instructions to make it </span><br /> {recipe.instructions}</p>
+                <div className="flex flex-col gap-2 justify-center">
+                  <p className="text-xl font-semibold">Instructions:</p>
+                  {recipe.instructions.map((instruct, index) => (
+                    <div className={`flex gap-2 items-center ${colures[index]}`}>
+                      <FaMapMarker /> <p key={index}>{instruct}</p>
+                    </div>
+                  ))}{" "}
+                </div>
               </div>
               <div className='w-full lg:w-1/2 flex flex-col gap-3'>
                 <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className="h-80 rounded-3xl" />

@@ -8,7 +8,7 @@ import logo from "../images/logo.png";
 const Navbar = () => {
   const [cookie, setCookie] = useCookies(["access_token"]); 
   const [showNavbar, setShowNavbar] = useState(window.location.pathname === "/auth");
-  const [showHamburger, setShowHamburger] = useState(true);
+  const [showHamburger, setShowHamburger] = useState(false);
   const  navigate = useNavigate();
   const logout = ()=>{
     setCookie("access_token", "");
@@ -23,11 +23,11 @@ const Navbar = () => {
   return (
     <section className="z-50">
 
-    <header className={` ${showNavbar ? `hidden` : ` border-b-[1px] drop-shadow-lg py-2 md:px-20  min-w-full  bg-stone-100 px-10 fixed lg:relative flex justify-between gap-7  text-slate-800`} `} >
-      <Link to={"/"} className='w-20 lg:w-28'><img src={logo} alt="logo" /></Link>
+    <header className={` ${showNavbar ? `hidden` : ` border-b-[1px] drop-shadow-lg py-2 md:px-20  min-w-full  bg-stone-100 px-4 fixed lg:relative flex justify-between gap-7  text-slate-800`} `} >
+      <Link to={"/"} className='w-20 lg:w-24'><img src={logo} alt="logo" /></Link>
       <div className='hidden lg:flex items-center justify-center text-md gap-8 '>
-      {localStorage.token && <Link to={"/addrecipe"}>Add Recipes</Link>}
-        <Link to={"/"}>Favorite Recipes</Link>
+      {localStorage.token && <Link to={"/addrecipe"}>add recipe</Link>}
+        <Link to={"/"}>my favorites</Link>
         {localStorage.token ? (
           <button className="p-1 font-semibold px-4 bg-transparent border-2 border-slate-900 rounded-full" onClick={logout}>Log out</button>
           ) : (

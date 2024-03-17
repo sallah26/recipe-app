@@ -10,9 +10,9 @@ import { useGetUserId } from '../hooks/useGetUserId.js';
 
 const AddRecipe = () => {
     const userId = useGetUserId();
-    console.log(userId);
-    const [recipe, setRecipe] = useState({name: "", ingredients: [], cookingTime: 0, imgUrl: "", userOwner: userId,  instructions: ""});;
+    const [recipe, setRecipe] = useState({name: "", ingredients: [""], cookingTime: 0, imgUrl: "", userOwner: userId,  instructions: [""]});;
     const [loading, setLoading] = useState(false);
+    const [err, setErr] = useState("");
     const navigate = useNavigate();
    
     const handleChange = (e)=>{
@@ -20,7 +20,7 @@ const AddRecipe = () => {
         setRecipe({...recipe, [name]: value})
     };
 
-    const handleIngridentsChange = (e, idx)=>{
+    const handleIngredientsChange = (e, idx)=>{
         const {value} = e.target;
         const ingredients = recipe.ingredients;
         ingredients[idx] = value;
@@ -28,8 +28,23 @@ const AddRecipe = () => {
     }
     
 
-    const AddIngrident = ()=>{
+    const AddIngredient = ()=>{
         setRecipe({...recipe, ingredients: [...recipe.ingredients, ""]});
+    };
+
+
+
+    // instructions change track
+    const handleInstructionsChange = (e, index)=>{
+        const {val} = e.target;
+        const instructions = recipe.instructions;
+        instructions[index] = val;
+        setRecipe({...recipe, instructions})
+    }
+    
+
+    const AddInstruction = ()=>{
+        setRecipe({...recipe, instructions: [...recipe.instructions, ""]});
     };
 
     const handleAddRecipe = ()=>{
@@ -47,23 +62,27 @@ const AddRecipe = () => {
     }
     // }   
   return (
-      <div className='min-w-[700px]'>
+      <div className='flex justify-center py-20 text-slate-800'>
           {loading && <Loading />}
-      <div className="w-full border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
-      <p className='text-3xl text-green-500 font-semibold'>Add Recipes to your page</p>
-      <p className='text-[20px] text-rose-500'>error</p>
+      <div className="max-w-[700px] border-[2px] rounded-2xl border-slate-300 flex flex-col items-center justify-center p-4 gap-7">
+      <p className='text-2xl '>add nice😋 recipes to the system</p>
+      {err && (
+        <p className='text-[20px] text-rose-500'>{err}</p>
+      )}
       <div  className='flex flex-col w-full gap-7 py-4 px-4 md:px-10'>
-      <div className='flex items-center relative'>
+        <div className='flex items-center relative'>
             <PiBowlFoodFill  className='text-slate-800 absolute ml-3' size={23}/>
             <input required onChange={handleChange} name="name" type="text" placeholder='recipe name...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
         </div>
         {recipe.ingredients.map((ingredient, idx) => (
             <div key={idx} className='flex items-center relative'>
                 <PiPottedPlantFill  className='text-slate-800 absolute ml-3' size={23}/>
-                <input required onChange={(e)=>handleIngridentsChange(e, idx)} name="ingredients" type="text" placeholder='ingredients' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
+                <input required onChange={(e)=>handleIngredientsChange(e, idx)} name="ingredients" type="text" placeholder='ingredients' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
             </div>
         ))}
-        <button onClick={AddIngrident} type='button'>Add ingredient</button>
+        <div className='flex justify-center items-center '>
+            <button onClick={AddIngredient} type='button' className='text-white h-10 bg-stone-700 rounded-full w-2/3'>Add ingredient</button>
+        </div>
         
         
         <div className='flex items-center relative'>
@@ -75,8 +94,21 @@ const AddRecipe = () => {
             <input required onChange={handleChange} name="imgUrl" type="text" placeholder='image link...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
         </div>
         <div className='flex items-start relative'>
-            <textarea rows={5} cols={50} required  onChange={handleChange} name="instructions" type="textarea" placeholder='write the instructionss...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full py-4 min-h-28 px-4 text-black'/>
         </div>
+
+
+        {/* Instructions */}
+        {recipe.instructions.map((instruction, index) => (
+            <div key={index} className='flex items-center relative'>
+                <PiPottedPlantFill  className='text-slate-800 absolute ml-3' size={23}/>
+                <textarea rows={5} cols={50} required  onChange={(e)=>handleInstructionsChange(e, index)} name="instructions" type="textarea" placeholder='write the instructionss...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full py-4 min-h-28 px-4 text-black'/>
+            </div>
+        ))}
+        <div className='flex justify-center items-center '>
+            <button onClick={AddInstruction} type='button' className='text-white h-10 bg-stone-700 rounded-full w-2/3'>Add instruction</button>
+        </div>
+
+
         <button onClick={handleAddRecipe} className='bg-teal-600 outline-0 border-[1.5px] shadow-lg shadow-teal-400 rounded-full border-slate-700 w-full h-10 px-10 text-white'>Add Recipe</button>
       </div>
     </div>
