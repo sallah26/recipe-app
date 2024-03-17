@@ -24,8 +24,9 @@ const Home = () => {
 
   let ke = -1;
   return (
-    <div className="py-20 flex justify-center">
+    <div className="py-20 flex flex-col items-center ">
     {loading && <Loading />}
+    <p className='text-2xl md:text-[100px] pb-20 text-slate-900 font-bold '>Make Nice Recipes With Us</p>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 justify-center">
       {recipes.map((recipe)=>{
         return (
@@ -34,7 +35,7 @@ const Home = () => {
             <div className='flex flex-col gap-5 p-4'>
               <p className="text-[19px] text-slate-800 font-semibold">{recipe.name}</p>
             </div>
-            <button className='mainbtn w-5/6 h-10 bg-stone-800 text-white rounded-xl border-2 border-slate-500 ' onClick={()=> {navigate(`/details/${recipe._id}`)}}>Preview the recipe</button>
+            <button className='mainbtn w-5/6 h-10 bg-stone-800 text-white rounded-full border-2 border-slate-500 ' onClick={()=> {navigate(`/details/${recipe._id}`)}}>Preview the recipe</button>
             <div className='overl'></div>
           </div>
         )

@@ -45,7 +45,6 @@ const DetailsOfRecipe = () => {
 
   return (
       <div className='flex flex-col items-center'>
-        <FaChevronLeft size={30} onClick={()=>navigate('/')} className="h-20 absolute left-10 top-5 text-slate-800"/>
         <div>
           {loading ? (
             <Loading />
