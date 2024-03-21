@@ -26,7 +26,19 @@ let RecipeSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'users', 
         required: true
-    }
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    rate: {
+        type: Number,
+        required: true,
+    },
+    raters: [{
+        type: String,
+        required: true,
+    }],
 })
 
 export const RecipeModel = mongoose.model("recipes", RecipeSchema);

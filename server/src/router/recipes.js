@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
 
 // Route for creating Recipe
 router.post("/", async (req, res) => {
-    const { name, ingredients, instructions, imgUrl, cookingTime, userOwner } = req.body;
+    const { name, ingredients, instructions, imgUrl, cookingTime, userOwner, username, rate, raters } = req.body;
 
     try {
        
@@ -39,7 +39,11 @@ router.post("/", async (req, res) => {
             instructions: instructions,
             imgUrl: imgUrl || "",
             cookingTime: parseInt(cookingTime),
-            userOwner: userOwner
+            userOwner: userOwner,
+            username: username,
+            rate: rate,
+            raters: raters,
+
         });
 
         await newRecipe.save();

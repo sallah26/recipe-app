@@ -7,10 +7,14 @@ import { IoTimeSharp } from "react-icons/io5";
 import Loading from '../components/Loading';
 import { useNavigate} from "react-router-dom"
 import { useGetUserId } from '../hooks/useGetUserId.js';
+import { useGetUsername } from '../hooks/useGetUsername.js';
 
 const AddRecipe = () => {
+    // Hooks for getting the username and userid
     const userId = useGetUserId();
-    const [recipe, setRecipe] = useState({name: "", ingredients: [""], cookingTime: 0, imgUrl: "", userOwner: userId,  instructions: [""]});
+    const username = useGetUsername();
+
+    const [recipe, setRecipe] = useState({name: "", ingredients: [""], cookingTime: 0, imgUrl: "", userOwner: userId,  instructions: [""], username: username, rate: 0, rateFrequency: 0});
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState("");
     const navigate = useNavigate();

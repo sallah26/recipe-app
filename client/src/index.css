@@ -161,3 +161,16 @@ textarea::placeholder {
   border-radius: 20px;
   align-items: center;
 }
+
+
+
+
+/* star */
+input[type="radio"] {
+  display: none;
+}
+.star {
+  cursor: pointer;
+  font-size: 2rem;
+  margin: 5px;
+}

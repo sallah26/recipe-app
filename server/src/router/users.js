@@ -55,6 +55,7 @@ router.post("/login", async (req, res) => {
         const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET); // Use environment variable for secret key
         return res.status(201).send({
             token: token,
+            username: username,
             userId: existingUser._id,
             message: "User Login successfully",
         });

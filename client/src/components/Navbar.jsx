@@ -38,16 +38,16 @@ const Navbar = () => {
           }
       </div>
       <button className={`flex lg:hidden flex-col justify-center  hamburger-menu`} onClick={handleHamburger}>
-          <div className={`${showHamburger && 'show-menu'} flex flex-col`}>
-            <span className='first'></span>
-            <span className='second'></span>
-            <span className='third'></span>
+          <div className={`${showHamburger && 'show-menu'} flex flex-col `}>
+            <span className='first dark:bg-white'></span>
+            <span className='second dark:bg-white'></span>
+            <span className='third dark:bg-white'></span>
           </div>
       </button>
     
     </header>
     {showHamburger && (
-      <div className='show-hamburger opacity-85 bg-slate-900'>
+      <div className='show-hamburger opacity-85 bg-slate-900 dark:bg-slate-700'>
         <div className="flex flex-col text-lg">
           <Link to={"/"} className='p-4 font-bold border-b-[1px] border-slate-400 '>Home</Link>
           <div className='flex flex-col items-center justify-center text-md gap-1 '>
