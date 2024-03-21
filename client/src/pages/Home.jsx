@@ -24,7 +24,7 @@ const Home = () => {
 
   let ke = -1;
   return (
-    <div className="py-20 flex flex-col items-center px-4 md:px-16 text-slate-900">
+    <div className=" py-20 flex flex-col items-center px-4 md:px-16 text-slate-900 dark:text-slate-100 dark:bg-zinc-800">
     
     <div className="flex flex-col md:flex-row justify-between items-center pb-20">
       <div className='flex flex-col items-center justify-center'>

@@ -54,18 +54,18 @@ const DetailsOfRecipe = () => {
       });
   }, [id]);
 
-  const colures = ["text-teal-500","text-green-500","text-yellow-500","text-blue-600","text-red-500","text-orange-400","text-red-400"];
+  const colures = ["text-sky-100","text-sky-200","text-sky-300","text-sky-400","text-sky-500","text-sky-600","text-indigo-100","text-indigo-200","text-indigo-300","text-indigo-400","text-indigo-500"];
 
   return (
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col items-center dark:text-slate-100 dark:bg-zinc-800'>
         <div>
           {loading ? (
             <Loading />
           ) : recipe && (
-            <div className='max-w-[1300px] bg-stone-200 text-stone-800  border-slate-400 shadow-xl my-20 border-[1px] p-10 rounded-xl'>
+            <div className='max-w-[1300px] bg-stone-200 text-stone-800 text-  border-slate-400 shadow-xl my-20 border-[1px] p-10 rounded-xl dark:text-slate-100 dark:bg-zinc-700'>
             <div className="flex flex-col lg:flex-row ">
               <div className="w-full lg:w-1/2 flex flex-col gap-8 p-4 items-start text-start">
-                <p className="text-4xl text-stone-900 font-bold">{recipe.name}</p>
+                <p className="text-4xl  font-bold">{recipe.name}</p>
                 <div className="flex flex-col gap-2 justify-center">
                   <p className="text-xl font-semibold">Ingredients:</p>
                   {recipe.ingredients.map((ingr, index) => (
@@ -74,14 +74,16 @@ const DetailsOfRecipe = () => {
                     </div>
                   ))}{" "}
                 </div>
-                <p className="text-xl font-semibold">Total Cooking Time: <span className="text-yellow-800">{recipe.cookingTime} Mins</span></p>
+                <p className="text-xl font-semibold">Total Cooking Time: <span className="text-yellow-800 dark:text-yellow-600">{recipe.cookingTime} Mins</span></p>
                 <div className="flex flex-col gap-2 justify-center">
                   <p className="text-xl font-semibold">Instructions:</p>
-                  {recipe.instructions.map((instruct, index) => (
-                    <div className={`flex gap-2 items-center ${colures[index]}`}>
-                      <FaMapMarker /> <p key={index}>{instruct}</p>
-                    </div>
-                  ))}{" "}
+                  <div className="flex flex-col gap-9">
+                    {recipe.instructions.map((instruct, index) => (
+                      <div className={`flex gap-1  text-sm flex-col items-start`}>
+                        <p className="text-xl font-semibold text-start">Step {index + 1}</p> <p className="text-justify" key={index}>{instruct}</p>
+                      </div>
+                    ))}{" "}
+                  </div>
                 </div>
               </div>
               <div className='w-full lg:w-1/2 flex flex-col gap-3'>
@@ -103,7 +105,7 @@ const DetailsOfRecipe = () => {
           )}
         </div>
 
-        <p className="text-4xl text-stone-900 font-bold">Here Explore Other available Recipes!</p>
+        <p className="text-4xl  font-bold">Here Explore Other available Recipes!</p>
             
         {/* The whole page is here */}
         {loading && <Loading />}

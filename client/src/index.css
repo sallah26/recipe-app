@@ -128,19 +128,16 @@ textarea::placeholder {
 }
 
 .show-menu .first{
-  background-color: blue;
   position: absolute;
   transform: rotate(45deg);
   transition-duration: 300ms;
 }
 
 .show-menu .second{
-  background-color: rgb(115, 115, 187);
   position: absolute;
   display: none;
 }
 .show-menu .third{
-  background-color: blue;
   position: absolute;
   margin-top: 0px!important;
   transform: rotate(315deg);

@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 import logo from "../images/logo.png";
+import DarkModeToggle from './DarkModeToggle';
 
 const Navbar = () => {
   const [cookie, setCookie] = useCookies(["access_token"]); 
@@ -23,13 +24,14 @@ const Navbar = () => {
   return (
     <section className="z-50">
 
-    <header className={` ${showNavbar ? `hidden` : ` border-b-[1px] drop-shadow-lg py-2 md:px-20  min-w-full  bg-stone-100 px-4 fixed lg:relative flex justify-between gap-7  text-slate-800`} `} >
+    <header className={` ${showNavbar ? `hidden` : ` border-b-[1px] drop-shadow-lg py-2 md:px-20  min-w-full  bg-stone-100 px-4 fixed lg:relative flex justify-between gap-7  text-slate-800`} dark:border-stone-600 border-b-[1px] dark:shadow-stone-600 shadow-xl dark:text-slate-100 dark:bg-zinc-800`} >
       <Link to={"/"} className='w-20 lg:w-24'><img src={logo} alt="logo" /></Link>
       <div className='hidden lg:flex items-center justify-center text-md gap-8 '>
+        <DarkModeToggle />
       {localStorage.token && <Link to={"/addrecipe"}>add recipe</Link>}
         <Link to={"/"}>my favorites</Link>
         {localStorage.token ? (
-          <button className="p-1 font-semibold px-4 bg-transparent border-2 border-slate-900 rounded-full" onClick={logout}>Log out</button>
+          <button className="p-1 font-semibold px-4 bg-transparent border-2 border-slate-900 dark:border-slate-400 rounded-full" onClick={logout}>Log out</button>
           ) : (
             <Link to={"/auth"} className="p-1 font-semibold px-4 bg-transparent border-2 border-green-600 rounded-full">Login</Link>
             )
