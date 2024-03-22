@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Star = ({ onRate }) => {
-  const [rating, setRating] = useState(null);
+const Star = ({ onRate, val }) => {
+  const [rating, setRating] = useState(val); // Use val as the initial rating
   const [hover, setHover] = useState(null);
   const totalStars = 5;
+
+  // Update rating when val changes
+  useEffect(() => {
+    setRating(val);
+  }, [val]);
 
   // Function to handle rating change
   const handleRatingChange = (currentRating) => {
@@ -14,12 +19,11 @@ const Star = ({ onRate }) => {
 
   return (
     <div className="">
-      {[...Array(totalStars)].map((star, index) => {
+      {[...Array(totalStars)].map((_, index) => {
         const currentRating = index + 1;
         return (
           <label key={index}>
             <input
-              key={star}
               type="radio"
               name="rating"
               value={currentRating}
@@ -39,7 +43,6 @@ const Star = ({ onRate }) => {
           </label>
         );
       })}
-      
     </div>
   );
 };

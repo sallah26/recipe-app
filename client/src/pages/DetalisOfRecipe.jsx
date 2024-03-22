@@ -16,14 +16,18 @@ const DetailsOfRecipe = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [owner, setOwner] = useState(false);
+  const [doesRated, setDoesRated] = useState(false);
   const userId = useGetUserId();
 
 
-  useEffect(() => {
+  // For getting all of the recipes
+  useEffect(() => { 
     setLoading(true)
     axios.get('http://localhost:5000/recipe/')
     .then((res) => {
-      setRecipes(res.data)
+      setRecipes(res.data);
+      
+
       setLoading(false);
      
     }).catch((err)=>{
@@ -32,20 +36,21 @@ const DetailsOfRecipe = () => {
     );    
   }, []);
 
+  // For getting single recipe by id
   useEffect(() => {
     setLoading(true);
     axios
       .get(`http://localhost:5000/recipe/${id}`)
       .then((res) => {
         setRecipe(res.data);
+        console.log(res.data);
         var owner = res.data.userOwner;
         if (owner === userId){
           setOwner(true);
         } else{
           setOwner(false);
         }
-        console.log(res.data);
-        console.log(owner === userId);
+       
 
       })
       .catch((err) => {
@@ -53,6 +58,7 @@ const DetailsOfRecipe = () => {
       })
       .finally(() => {
         setLoading(false);
+        // setReload(prevReload => !prevReload);
       });
   }, [id]);
 
@@ -69,16 +75,14 @@ const DetailsOfRecipe = () => {
   // Update only rate issue
   const handleRateUpdating = () => {
     setLoading(true);
-    const raters = recipe.raters; 
+    let raters = recipe.raters; 
+    console.log("raters are " + raters);
     let previousRateScore = recipe.rate;
-    console.log("old raters are " + raters);
-    console.log("old rate score is " + previousRateScore);
+    console.log("rate previousRateScore " + previousRateScore);
     raters.push(userId);
-    previousRateScore = recipe.rate + rating;
-    console.log("rate score after adding with current rate is " + previousRateScore);
-    const rateScore = previousRateScore / raters.length;
-    console.log("new raters are " + raters);
-    console.log("new rate score is " + rateScore);
+    const rateScore = recipe.rate + rating;
+    let CurrentRateScore = rateScore / raters.length;
+    
     axios
       .put(`http://localhost:5000/recipe/${id}`, {
         rate: rateScore,
@@ -94,16 +98,16 @@ const DetailsOfRecipe = () => {
       .finally(() => {
         // Relloading the data again
         // reloadAgain
-        // window.location.reload()
-        setLoading(false)
+        window.location.reload()
         alert(`Thanks for Rating us ${rating} Stars!`)
+        setLoading(false)
         // console.log(recipe);
       });
   };
 
   const colures = ["text-sky-100","text-sky-200","text-sky-300","text-sky-400","text-sky-500","text-sky-600","text-sky-600","text-sky-500","text-sky-400","text-sky-300","text-sky-200"];
   return (
-      <div className='flex flex-col items-center dark:text-slate-100 dark:bg-zinc-800'>
+      <div className='flex max-w-screen flex-col items-center dark:text-slate-100 dark:bg-zinc-800'>
         <div>
           {loading ? (
             <Loading />
@@ -135,10 +139,10 @@ const DetailsOfRecipe = () => {
                   {recipe.username && <p className="flex gap-1 items-center">Created by : <span className="text-green-500 font-bold flex gap-1 items-center"><RiVerifiedBadgeFill  size={21}/>{recipe.username}</span></p>}
                   <div className="flex flex-col gap-1 py-4">
                       <p className="text-2xl font-semibold">Did you love it?</p>
-                      {recipe.rate > 0 && (<p className="text-[15px]">Based on {recipe.raters.length} peoples this recipe got {recipe.rate} stars!</p>)}
+                      {recipe.rate > 0 && (<p className="text-[15px]">Based on {recipe.raters.length} users this recipe got {parseFloat(recipe.rate / recipe.raters.length)} Rate!</p>)}
                       <div className="flex gap-2 items-center ">
-                          <Star onRate={handleRate} />
-                          <button onClick={handleRateUpdating} className="h-8 px-5 rounded-md border-orange-500 bg-orange-700 text-white border-2">Rate</button>
+                          <Star onRate={handleRate} val={parseInt(recipe.rate / recipe.raters.length)}/>
+                          <button disabled={doesRated} onClick={handleRateUpdating} className="h-8 px-5 rounded-md border-orange-500 bg-orange-700 text-white border-2">Rate</button>
                       </div>
                       {rating && (<p className='text-[15px]  text-orange-300'>{rating} stars selected!</p>)}
                   </div>

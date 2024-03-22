@@ -14,7 +14,7 @@ const AddRecipe = () => {
     const userId = useGetUserId();
     const username = useGetUsername();
 
-    const [recipe, setRecipe] = useState({name: "", ingredients: [""], cookingTime: 0, imgUrl: "", userOwner: userId,  instructions: [""], username: username, rate: 0, rateFrequency: 0});
+    const [recipe, setRecipe] = useState({name: "", ingredients: [""], cookingTime: 0, imgUrl: "", userOwner: userId,  instructions: [""], username: username, rate: 0, raters: []});
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState("");
     const navigate = useNavigate();

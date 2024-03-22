@@ -7,7 +7,6 @@ const DeleteRecipe = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
-    
     const DeleteRecipes = () =>{
         setLoading(true);
         axios.delete(`http://localhost:5000/recipe/${id}`)
@@ -15,14 +14,12 @@ const DeleteRecipe = () => {
             setLoading(false);
             alert("the recipe is deleted succesfully!")
             navigate('/');
-
          })
          .catch((err)=> {
             setLoading(false);
             alert("An error is occured please go back and check!");
             console.log(err);
         })
-         
     }
   return (
     <>
@@ -37,5 +34,5 @@ const DeleteRecipe = () => {
     </>
   )
 }
-
+ 
 export default DeleteRecipe
