@@ -16,8 +16,11 @@ const Star = ({ onRate, val }) => {
     // Call the prop function to send rating data to the parent component
     onRate(currentRating);
   };
-
+  console.log("val : " + val);
+  console.log("rating : " + rating);
   return (
+  rating ?  (
+
     <div className="">
       {[...Array(totalStars)].map((_, index) => {
         const currentRating = index + 1;
@@ -33,7 +36,7 @@ const Star = ({ onRate, val }) => {
               className="star"
               style={{
                 color:
-                  currentRating <= (hover || rating) ? "#ffc107" : "#e4e5e9",
+                  currentRating <= (hover || rating) ? "#FFAF45" : "#C7A8CC",
               }}
               onMouseEnter={() => setHover(currentRating)}
               onMouseLeave={() => setHover(null)}
@@ -44,7 +47,23 @@ const Star = ({ onRate, val }) => {
         );
       })}
     </div>
-  );
+
+    )  : (
+    <div className="">
+      {[...Array(totalStars)].map((_, index) => {
+        const currentRating = index + 1;
+        return (
+          <span
+            key={index}
+            className="rate-star"
+            style={{ color: currentRating <= val ? "#FFAF45" : "#C7A8CC" }}
+          >
+            &#9733;
+          </span>
+        );
+      })}
+    </div>
+  ))
 };
 
 export default Star;

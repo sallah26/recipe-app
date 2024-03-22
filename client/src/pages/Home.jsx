@@ -4,6 +4,7 @@ import axios from "axios";
 import Loading from "../components/Loading";
 import {useNavigate} from "react-router-dom";
 import hero_img from "../images/transparent-happy-face1.png";
+import Alert from '../components/Alert';
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -25,7 +26,6 @@ const Home = () => {
   let ke = -1;
   return (
     <div className=" py-20 flex flex-col items-center px-4 md:px-16 text-slate-900 dark:text-slate-100 dark:bg-zinc-800 ">
-    
     <div className="flex flex-col md:flex-row justify-between items-center pb-20">
       <div className='flex flex-col items-center justify-center'>
         <p className='text-5xl md:text-[60px]  font-bold py-1 leading-relaxed'>Make Delicious Recipes With Me</p>
@@ -40,7 +40,7 @@ const Home = () => {
         return (
           <div key={recipe._id} className="maindiv elem  max-w-[350px] border-[1px] text-slate-800 rounded-xl shadow-xl shadow-slate-400 bg-stone-200 dark:bg-stone-800 dark:border-stone-600 dark:text-white dark:shadow-stone-600">
             <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className='max-h-[300px] w-full rounded-ss-xl rounded-se-xl'/>
-            <div className='flex flex-col gap-5 p-4'>
+            <div className='flex flex-col items-center justify-center gap-5 p-4'>
               <p className="text-[19px]  font-semibold">{recipe.name}</p>
               <button className='mainbtn w-5/6 h-10 text-slate-100 bg-stone-800  rounded-full border-2 border-slate-500 ' onClick={()=> {navigate(`/details/${recipe._id}`)}}>Preview the recipe</button>
               <div className='overl'></div>

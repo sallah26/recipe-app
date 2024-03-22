@@ -175,3 +175,20 @@ input[type="radio"] {
   font-size: 2rem;
   margin: 5px;
 }
+
+
+@media screen and (max-width: 600px){
+  .star {
+    font-size: 1.6rem;
+    margin: 3px;
+  }
+  .rate-star{
+    font-size: 2rem;
+    margin: 4px;
+  }
+}
+
+.rate-star{
+  font-size: 2.3rem;
+  margin: 6px;
+}

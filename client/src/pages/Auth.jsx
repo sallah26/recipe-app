@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaLock, FaUnlockAlt, FaUserAlt } from "react-icons/fa";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { useCookies } from "react-cookie";
+import Alert from '../components/Alert';
 
 const Auth = () => {
   const [username, setUsername] = useState("");
@@ -16,6 +17,8 @@ const Auth = () => {
   const [err, setErr] = useState("");
   const navigate = useNavigate();
   const [_, setCookies] = useCookies(["access_token"]);
+  const [showRegistrationAlert, setShowRegistrationAlert] = useState(false);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -23,12 +26,13 @@ const Auth = () => {
 
     try {
       await axios.post("http://localhost:5000/auth/register", { regUsername, regPassword });
-      alert("Registration completed!");
-      setErr("");
-      setShowRegister(false);
+      // alert("Registration completed!");
+        setShowRegistrationAlert(true)
+        setErr("");
+     
+      
     } catch (error) {
       console.log(error);
-      console.log(error.response.status);
       switch (error.response.status) {
         case 409:
           setErr(`Username ${regUsername} already exists`);
@@ -49,8 +53,7 @@ const Auth = () => {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userID', res.data.userId);
       localStorage.setItem('username', res.data.username);
-      alert("You are Logged in completed!");
-      navigate("/");
+      setShowLoginAlert(true)
     } catch (error) {
       console.log(error);
       switch (error.response.status) {
@@ -64,10 +67,30 @@ const Auth = () => {
     }
   };
 
+  const handleRegistrationAlertConfirm = () => {
+    // Redirect to login component or perform any other action here
+    setShowRegister(false);
+
+  };
+
+  const handleLoginAlertConfirm = () => {
+    // Redirect to login component or perform any other action here
+    setShowLoginAlert(false);
+    navigate("/");
+
+  };
+
   return (
     <article className='min-w-full flex items-center justify-center min-h-[100vh] bg-teal-800'>
+        {showRegistrationAlert && (
+          <Alert success={true} message="Registration completed!! Now Login to your Account!" action="Okay tnx dude!" onConfirm={handleRegistrationAlertConfirm}/>
+         )}{" "} 
+          {showLoginAlert && (
+          <Alert success={true} message="Boom! Login Successful!!" action="Pissay dude!" onConfirm={handleLoginAlertConfirm}/>
+         )}{" "} 
       <section>
         {!showRegister ? (
+          <>
           <div className="min-w-[450px] border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
             <p className='text-xl font-semibold'>Login With Your Username</p>
             <p className='text-[20px] text-red-600'>{err}</p>
@@ -93,7 +116,7 @@ const Auth = () => {
             </form>
             {/* Registration link */}
             <p className='text-[18px] '>don't have an account? <span onClick={() => { setShowRegister(true); setErr("") }} className='text-blue-400 cursor-pointer'>Sign up here</span></p>
-          </div>
+          </div></>
         ) : (
           // {/* Registration form */}{" "}
           <div className="min-w-[500px] border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
