@@ -13,6 +13,7 @@ const Auth = () => {
   const [regUsername, setRegUsername] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [regConfirmPassword, setRegConfirmPassword] = useState("");
+  const [showRegConfirmPassword, setShowRegConfirmPassword] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [err, setErr] = useState("");
   const navigate = useNavigate();
@@ -77,11 +78,12 @@ const Auth = () => {
     // Redirect to login component or perform any other action here
     setShowLoginAlert(false);
     navigate("/");
+    window.location.reload()
 
   };
 
   return (
-    <article className='min-w-full flex items-center justify-center min-h-[100vh] bg-teal-800'>
+    <article className='min-w-full flex items-center justify-center min-h-[100vh] text-slate-800 dark:text-slate-100'>
         {showRegistrationAlert && (
           <Alert success={true} message="Registration completed!! Now Login to your Account!" action="Okay tnx dude!" onConfirm={handleRegistrationAlertConfirm}/>
          )}{" "} 
@@ -91,19 +93,19 @@ const Auth = () => {
       <section>
         {!showRegister ? (
           <>
-          <div className="min-w-[450px] border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
-            <p className='text-xl font-semibold'>Login With Your Username</p>
+          <div className="min-w-[450px] border-[1px] rounded-2xl border-slate-500 shadow-lg shadow-slate-700 flex flex-col items-center justify-center p-4 gap-7">
+            <p className='text-xl my-auto font-semibold'>Login With Your Username</p>
             <p className='text-[20px] text-red-600'>{err}</p>
             <form action="" className='flex flex-col w-full gap-4'>
               {/* Username input */}
               <div className='flex items-center relative'>
                 <FaUserAlt className='text-slate-800 absolute ml-3' size={23} />
-                <input required value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="" placeholder='username...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
+                <input required value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="" placeholder='username...' id="" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
               </div>
               {/* Password input */}
               <div className='flex items-center relative'>
                 <FaUnlockAlt className='text-slate-800 absolute ml-3' size={23} />
-                <input required value={password} onChange={(e) => setPassword(e.target.value)} type={`${showPassword ? "text" : "password"}`} name="" placeholder='password...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
+                <input required value={password} onChange={(e) => setPassword(e.target.value)} type={`${showPassword ? "text" : "password"}`} name="" placeholder='password...' id="" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
                 {/* Password visibility toggle */}
                 {showPassword ? (
                   <BsEyeSlashFill className='cursor-pointer text-slate-800 right-0 absolute mr-4' size={22} onClick={() => { setShowPassword(!showPassword) }} />
@@ -112,26 +114,26 @@ const Auth = () => {
                 )}
               </div>
               {/* Login button */}
-              <button onClick={handleLogin} className='bg-teal-600 outline-0 border-[1.5px] shadow-lg shadow-teal-400 rounded-full border-slate-700 w-full h-10 px-10 text-white'>LOG IN</button>
+              <button onClick={handleLogin} className='bg-slate-800 outline-0 border-[1.5px] shadow-lg shadow-slate-400 rounded-full border-slate-700 w-full h-10 px-10 text-white'>LOG IN</button>
             </form>
             {/* Registration link */}
-            <p className='text-[18px] '>don't have an account? <span onClick={() => { setShowRegister(true); setErr("") }} className='text-blue-400 cursor-pointer'>Sign up here</span></p>
+            <p className='text-[16px] '>Don't have an account? <span onClick={() => { setShowRegister(true); setErr("") }} className='text-blue-600 cursor-pointer'>Sign up here</span></p>
           </div></>
         ) : (
           // {/* Registration form */}{" "}
-          <div className="min-w-[500px] border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
+          <div className="min-w-[500px] border-[1px] rounded-2xl border-slate-500 shadow-lg shadow-slate-700 flex flex-col items-center justify-center p-4 gap-7">
             <p className='text-xl font-semibold'>Register With Your Username and Password</p>
             <p className='text-[20px] text-rose-500'>{err}</p>
             <form action="" className='flex flex-col w-full gap-6 py-4'>
               {/* Username input */}
               <div className='flex items-center relative'>
                 <FaUserAlt className='text-slate-800 absolute ml-3' size={23} />
-                <input required value={regUsername} onChange={(e) => setRegUsername(e.target.value)} type="text" name="" placeholder='username...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
+                <input required value={regUsername} onChange={(e) => setRegUsername(e.target.value)} type="text" name="" placeholder='username...' id="" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
               </div>
               {/* Password input */}
               <div className='flex items-center relative'>
                 <FaUnlockAlt className='text-slate-800 absolute ml-3' size={23} />
-                <input required value={regPassword} onChange={(e) => setRegPassword(e.target.value)} type={`${showPassword ? "text" : "password"}`} name="" placeholder='password...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
+                <input required value={regPassword} onChange={(e) => setRegPassword(e.target.value)} type={`${showPassword ? "text" : "password"}`} name="" placeholder='password...' id="" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
                 {/* Password visibility toggle */}
                 {showPassword ? (
                   <BsEyeSlashFill className='cursor-pointer text-slate-800 right-0 absolute mr-4' size={22} onClick={() => { setShowPassword(!showPassword) }} />
@@ -142,16 +144,16 @@ const Auth = () => {
               {/* Confirm password input */}
               <div className='flex items-center relative'>
                 <FaLock className='text-slate-800 absolute ml-3' size={23} />
-                <input required value={regConfirmPassword} onChange={(e) => setRegConfirmPassword(e.target.value)} type={`${showPassword ? "text" : "password"}`} name="" placeholder='confirm password...' id="" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
+                <input required value={regConfirmPassword} onChange={(e) => setRegConfirmPassword(e.target.value)} type={`${showRegConfirmPassword ? "text" : "password"}`} name="" placeholder='confirm password...' id="" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black' />
                 {/* Password visibility toggle */}
-                {showPassword ? (
-                  <BsEyeSlashFill className='cursor-pointer text-slate-800 right-0 absolute mr-4' size={22} onClick={() => { setShowPassword(!showPassword) }} />
+                {showRegConfirmPassword ? (
+                  <BsEyeSlashFill className='cursor-pointer text-slate-800 right-0 absolute mr-4' size={22} onClick={() => { setShowRegConfirmPassword(!showRegConfirmPassword) }} />
                 ) : (
-                  <BsEyeFill className='cursor-pointer text-slate-800 right-0 absolute mr-4' size={22} onClick={() => { setShowPassword(!showPassword) }} />
+                  <BsEyeFill className='cursor-pointer text-slate-800 right-0 absolute mr-4' size={22} onClick={() => { setShowRegConfirmPassword(!showRegConfirmPassword) }} />
                 )}
               </div>
               {/* Register button */}
-              <button onClick={handleRegistration} className='bg-teal-600 outline-0 border-[1.5px] shadow-lg shadow-teal-400 rounded-full border-slate-700 w-full h-10 px-10 text-white'>REGISTER</button>
+              <button onClick={handleRegistration} className='bg-slate-800 outline-0 border-[1.5px] shadow-lg shadow-slate-400 rounded-full border-slate-700 w-full h-10 px-10 text-white'>REGISTER</button>
             </form>
           </div>
         )}

@@ -33,7 +33,7 @@ const Navbar = () => {
         {localStorage.token ? (
           <button className="p-1 font-semibold px-4 bg-transparent border-2 border-slate-900 dark:border-slate-400 rounded-full" onClick={logout}>Log out</button>
           ) : (
-            <Link to={"/auth"} className="p-1 font-semibold px-4 bg-transparent border-2 border-green-600 rounded-full">Login</Link>
+            <Link to={"/auth"}  className="p-1 font-semibold px-4 bg-transparent border-2 border-green-600 rounded-full">Login</Link>
             )
           }
       </div>

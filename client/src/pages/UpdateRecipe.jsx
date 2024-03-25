@@ -6,19 +6,23 @@ import { FaChevronLeft, FaImages } from "react-icons/fa";
 import { IoTimeSharp } from "react-icons/io5";
 import Loading from '../components/Loading';
 import { useNavigate, useParams } from "react-router-dom";
+import { useGetUserId } from '../hooks/useGetUserId';
 
 const UpdateRecipe = () => {
+    const userId = useGetUserId();
     const [recipe, setRecipe] = useState({
         name: '',
         ingredients: [],
         cookingTime: '',
         imgUrl: '',
-        userOwner: "65f215fb3376d02a96ad9f0a",
+        userOwner: userId,
         instructions: ''
     });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
+    const [err, setErr] = useState("");
+
 
     useEffect(() => {
         setLoading(true);
@@ -31,7 +35,7 @@ const UpdateRecipe = () => {
                     ingredients: ingredients || [],
                     cookingTime: cookingTime || '',
                     imgUrl: imgUrl || '',
-                    userOwner: "65f215fb3376d02a96ad9f0a",
+                    userOwner: userId,
                     instructions: instructions || ''
                 });
             })
@@ -60,12 +64,17 @@ const UpdateRecipe = () => {
     };
 
     const handleAddRecipe = () => {
+        // check all  fields are filled in before sending request to server
+        if (!recipe.name || !recipe.ingredients.length || !recipe.cookingTime || !recipe.imgUrl || !recipe.instructions) {
+            setErr("Please fill in all required fields.");
+            return;
+        }
         setLoading(true);
         axios.put(`http://localhost:5000/recipe/${id}`, recipe)
       
         // axios.put("http://localhost:5000/recipe", recipe)
             .then((res) => {
-                alert("New Recipe added Successfully!");
+                alert("Recipe edited Successfully!");
                 setLoading(false);
                 navigate("/");
             })
@@ -76,21 +85,23 @@ const UpdateRecipe = () => {
     };
 
     return (
-      <section className='flex items-center justify-center min-w-full min-h-[100vh] bg-teal-700'>
-        <FaChevronLeft size={30} onClick={()=>navigate('/')} className="cursor-pointer h-20 absolute left-10 top-5 text-slate-800"/>
+      <section className='flex justify-center py-20 text-slate-900 dark:text-slate-100 dark:bg-zinc-800 min-w-full min-h-[100vh] bg-slate-50  '>
         <div className='min-w-[700px] my-20'>
             {loading && <Loading />}
-            <div className="w-full border-[2px] rounded-2xl border-teal-400 flex flex-col items-center justify-center p-4 gap-7">
-                <p className='text-3xl text-white font-semibold'>Update the Recipe</p>
+            <div className="w-full border-[2px] rounded-2xl border-slate-400 flex flex-col items-center justify-center p-4 gap-7">
+                <p className='text-3xl  font-semibold'>Update the Recipe</p>
+                {err && (
+                    <p className='text-[20px] text-rose-500'>{err}</p>
+                )}
                 <div className='flex flex-col w-full gap-7 py-4 px-4 md:px-10'>
                     <div className='flex items-center relative'>
                         <PiBowlFoodFill  className='text-slate-800 absolute ml-3' size={23}/>
-                        <input required onChange={handleChange} name="name" value={recipe.name} type="text" placeholder='recipe name...' id="recipe-name" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
+                        <input required onChange={handleChange} name="name" value={recipe.name} type="text" placeholder='recipe name...' id="recipe-name" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
                     </div>
                     {recipe.ingredients.map((ingredient, idx) => (
                         <div key={idx} className='flex items-center relative'>
                             <PiPottedPlantFill  className='text-slate-800 absolute ml-3' size={23}/>
-                            <input required onChange={(e) => handleIngredientsChange(e, idx)} name={`ingredient-${idx}`} value={ingredient} type="text" placeholder={`ingredient ${idx+1}`} id={`ingredient-${idx}`} className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
+                            <input required onChange={(e) => handleIngredientsChange(e, idx)} name={`ingredient-${idx}`} value={ingredient} type="text" placeholder={`ingredient ${idx+1}`} id={`ingredient-${idx}`} className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
                         </div>
                     ))}
                     <div className='flex justify-center'>
@@ -98,16 +109,17 @@ const UpdateRecipe = () => {
                     </div>
                     <div className='flex items-center relative'>
                         <IoTimeSharp  className='text-slate-800 absolute ml-3' size={23}/>
-                        <input required name="cookingTime" onChange={handleChange} value={recipe.cookingTime} type="number" placeholder='how much time will it take (minutes)...' id="cooking-time" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
+                        <input required name="cookingTime" onChange={handleChange} value={recipe.cookingTime} type="number" placeholder='how much time will it take (minutes)...' id="cooking-time" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
                     </div>
                     <div className='flex items-center relative'>
                         <FaImages  className='text-slate-800 absolute ml-3' size={23}/>
-                        <input required onChange={handleChange} name="imgUrl" value={recipe.imgUrl} type="text" placeholder='image link...' id="image-link" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
+                        <input required onChange={handleChange} name="imgUrl" value={recipe.imgUrl} type="text" placeholder='image link...' id="image-link" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>
                     </div>
                     <div className='flex items-start relative'>
-                        <textarea rows={15} cols={50} required  onChange={handleChange} name="instructions" value={recipe.instructions} type="textarea" placeholder='write the instructions...' id="instructions" className='shadow-md shadow-teal-400 bg-teal-500 outline-0 border-[2px] rounded-lg border-slate-900 w-full py-4 min-h-28 px-4 text-black'/>
+                        <textarea rows={15} cols={50} required  onChange={handleChange} name="instructions" value={recipe.instructions} type="textarea" placeholder='write the instructions...' id="instructions" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full py-4 min-h-28 px-4 text-black'/>
                     </div>
-                    <button onClick={handleAddRecipe} className='bg-teal-600 outline-0 border-[1.5px] shadow-lg shadow-teal-400 rounded-full border-slate-700 w-full h-10 px-10 text-white'>Update the Recipe</button>
+                    <button onClick={handleAddRecipe} className='bg-teal-600 dark:border-4 dark:shadow-xl border-slate-700 dark:border-slate-400 outline-0 border-[1.5px] shadow-lg shadow-slate-600 rounded-full  w-full h-10 px-10 text-white'>Update the Recipe</button>
+
                 </div>
             </div>
         </div>

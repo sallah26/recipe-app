@@ -8,6 +8,10 @@ import Loading from '../components/Loading';
 import { useNavigate} from "react-router-dom"
 import { useGetUserId } from '../hooks/useGetUserId.js';
 import { useGetUsername } from '../hooks/useGetUsername.js';
+import Alert from '../components/Alert.jsx';
+
+
+
 
 const AddRecipe = () => {
     // Hooks for getting the username and userid
@@ -17,6 +21,7 @@ const AddRecipe = () => {
     const [recipe, setRecipe] = useState({name: "", ingredients: [""], cookingTime: 0, imgUrl: "", userOwner: userId,  instructions: [""], username: username, rate: 0, raters: []});
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState("");
+    const [showAddAlert, setShowAddAlert] = useState(false);
     const navigate = useNavigate();
    
     const handleChange = (e)=>{
@@ -52,22 +57,41 @@ const AddRecipe = () => {
     };
 
     const handleAddRecipe = ()=>{
+        setErr("");
         console.log(recipe);
-        // const AddRecipe = ()=>{
-            setLoading(true)
-            axios.post("http://localhost:5000/recipe", recipe)
-            .then((res)=>{
-                alert("New Recipe added Successfully!")
+        if (!recipe.name || !recipe.ingredients.length || !recipe.cookingTime || !recipe.imgUrl || !recipe.instructions.length) {
+            setErr("Please Fill All Required Fields!");
+            return;
+       
+        }else{
+            // const AddRecipe = ()=>{
+                setLoading(true)
+                axios.post("http://localhost:5000/recipe", recipe)
+                .then((res)=>{
+                setShowAddAlert(true);
                 setLoading(false)
-                navigate("/")
+                
             }).catch((err)=>{
-                alert(`dude sallah u made error, ${err.message}`)
+                alert(`dude sallah ur server crash b/c made error, ${err.message}`)
             })
+        }
     }
+
+
+    const handleAddAlertConfirm = () => {
+        setShowAddAlert(false);
+        navigate("/");
+        window.location.reload();
+    }
+    
+
     // }   
   return (
     <>
           {loading && <Loading />}
+          {showAddAlert && (
+           <Alert success={true} message="New Recipe added Successfully!" rating={false} action="Ohhh dude!" onConfirm={handleAddAlertConfirm}/>
+          )}{" "}
       <div className='flex justify-center py-20 text-slate-900 dark:text-slate-100 dark:bg-zinc-800'>
       <div className="max-w-[900px] border-[1px] shadow-2xl drop-shadow-xl rounded-2xl shadow-slate-600 border-slate-600  dark:bg-zinc-700 flex flex-col items-center justify-center p-4 gap-7">
       <p className='text-2xl '>add nice😋 recipes to the system</p>

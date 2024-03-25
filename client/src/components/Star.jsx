@@ -19,7 +19,22 @@ const Star = ({ onRate, val }) => {
   console.log("val : " + val);
   console.log("rating : " + rating);
   return (
-  rating ?  (
+  rating ? (
+    <div className="">
+      {[...Array(totalStars)].map((_, index) => {
+        const currentRating = index + 1;
+        return (
+          <span
+            key={index}
+            className="rate-star"
+            style={{ color: currentRating <= val ? "#FFAF45" : "#C7A8CC" }}
+          >
+            &#9733;
+          </span>
+        );
+      })}
+    </div>
+  ) : (
 
     <div className="">
       {[...Array(totalStars)].map((_, index) => {
@@ -48,22 +63,7 @@ const Star = ({ onRate, val }) => {
       })}
     </div>
 
-    )  : (
-    <div className="">
-      {[...Array(totalStars)].map((_, index) => {
-        const currentRating = index + 1;
-        return (
-          <span
-            key={index}
-            className="rate-star"
-            style={{ color: currentRating <= val ? "#FFAF45" : "#C7A8CC" }}
-          >
-            &#9733;
-          </span>
-        );
-      })}
-    </div>
-  ))
+    ))
 };
 
 export default Star;

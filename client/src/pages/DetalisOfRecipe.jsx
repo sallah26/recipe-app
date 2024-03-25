@@ -20,7 +20,8 @@ const DetailsOfRecipe = () => {
   const [doesRated, setDoesRated] = useState(false);
   const userId = useGetUserId();
   const [showRateAlert, setShowRateAlert] = useState(false);
-
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  
 
   // For getting all of the recipes
   useEffect(() => { 
@@ -110,6 +111,25 @@ const DetailsOfRecipe = () => {
     setShowRateAlert(false);
   };
 
+  const handleShowDeleteAlert = () =>{
+    setShowDeleteAlert(true);
+  }
+
+  //handle delete recipe function
+  const handleConfirmDeleteRecipe = () =>{
+      setLoading(true);
+      setShowDeleteAlert(false);
+      axios.delete(`http://localhost:5000/recipe/${id}`)
+       .then(()=> {
+          setLoading(false);
+          navigate("/")
+       })
+       .catch((err)=> {
+          alert("An error is occured please go back and check!");
+          console.log(err);
+      })
+  } 
+
   const darkColures = ["text-sky-100","text-sky-200","text-sky-300","text-sky-400","text-sky-500","text-sky-600","text-sky-600","text-sky-500","text-sky-400","text-sky-300","text-sky-200"];
   // const colures = ["text-sky-400","text-sky-200","text-sky-300","text-sky-400","text-sky-500","text-sky-600","text-sky-600","text-sky-500","text-sky-400","text-sky-300","text-sky-200"];
   return (
@@ -157,6 +177,9 @@ const DetailsOfRecipe = () => {
                 {showRateAlert && (
           <Alert success={true} message="Thanks For Rating us!" rating={true} rateValue={rating} action="It's Okay dude!" onConfirm={handleRatingAlertConfirm}/>
          )}{" "}
+         {showDeleteAlert && (
+          <Alert success={false} message="Are you sure to delete this recipe?" rating={false} action="Yeah Delete it dude!" onConfirm={handleConfirmDeleteRecipe}/>
+         )}{" "}
               </div>
               <div className='w-full lg:w-1/2 flex flex-col gap-3'>
                 <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className="rounded-3xl" />
@@ -166,7 +189,7 @@ const DetailsOfRecipe = () => {
             {owner && (
                 <div className="flex flex-col items-center justify-center lg:flex-row mt-2">
                   <button onClick={()=>{navigate(`/updaterecipe/${recipe._id}`)}} className='m-2 lg:m-10 h-10 w-full lg:w-1/2 bg-green-600 text-white dark:border-slate-400 font-bold rounded-full border-2'>Edit the recipe</button>
-                  <button onClick={()=>{navigate(`/deleterecipe/${recipe._id}`)}} className='m-2 lg:m-10 h-10 w-full lg:w-1/2 bg-red-600 text-white dark:border-slate-400 font-bold rounded-full border-2'>Delete the recipe</button>
+                  <button onClick={handleShowDeleteAlert} className='m-2 lg:m-10 h-10 w-full lg:w-1/2 bg-red-600 text-white dark:border-slate-400 font-bold rounded-full border-2'>Delete the recipe</button>
                 </div>
               )}
               
