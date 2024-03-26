@@ -83,13 +83,13 @@ window.onload = function() {
 };
   return (
     <div className=" py-20 flex flex-col items-center px-4 md:px-16 text-slate-900 dark:text-slate-100 dark:bg-zinc-800 ">
-    <div className="flex flex-col md:flex-row justify-between items-center pb-20">
+    <div className="flex flex-col md:flex-row justify-between items-center md:pb-20">
       <div className='flex flex-col items-center justify-center'>
              
-        <p className='text-5xl md:text-[62px] font-bold py-1 leading-relaxed'><a href="/" className="typewrite" data-period="2000" data-type='[ "Wanna Crave Something New?", "Cook Up Inspiration Together.", "One Recipe at a Time.", "Make Nice Recipes With Us", "Simple to Spectacular.", " Explore Delicious Flavors." ]'>
+        <p className='text-3xl md:text-[62px] font-bold py-1 leading-relaxed'><a href="/" className="typewrite" data-period="2000" data-type='[ "Wanna Crave Something New?", "Cook Up Inspiration Together.", "One Recipe at a Time.", "Make Nice Recipes With Us", "Simple to Spectacular.", " Explore Delicious Flavors." ]'>
             <span className="wrap"></span>
           </a></p>
-        <p className='text-lg pb-20 max-w-[900px] '>"Discover new recipes effortlessly with our user-friendly app. Cook up a storm with easy-to-follow instructions. Enjoy delicious meals tailored to your taste buds."</p>
+        <p className='text-md md:text-lg pb-7 md:pb-20 max-w-[900px] '>"Discover new recipes effortlessly with our user-friendly app. Cook up a storm with easy-to-follow instructions. Enjoy delicious meals tailored to your taste buds."</p>
       </div>
       <img src={hero_img} className="w-[500px]" alt="chefe img" />
     </div>

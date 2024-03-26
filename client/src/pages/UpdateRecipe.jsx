@@ -86,14 +86,14 @@ const UpdateRecipe = () => {
 
     return (
       <section className='flex justify-center py-20 text-slate-900 dark:text-slate-100 dark:bg-zinc-800 min-w-full min-h-[100vh] bg-slate-50  '>
-        <div className='min-w-[700px] my-20'>
+        <div className='max-w-[700px] my-20'>
             {loading && <Loading />}
             <div className="w-full border-[2px] rounded-2xl border-slate-400 flex flex-col items-center justify-center p-4 gap-7">
-                <p className='text-3xl  font-semibold'>Update the Recipe</p>
+                <p className='text-2xl md:text-3xl  font-semibold'>Update the Recipe</p>
                 {err && (
                     <p className='text-[20px] text-rose-500'>{err}</p>
                 )}
-                <div className='flex flex-col w-full gap-7 py-4 px-4 md:px-10'>
+                <div className='flex flex-col w-full gap-7 py-4 px-0 md:px-10'>
                     <div className='flex items-center relative'>
                         <PiBowlFoodFill  className='text-slate-800 absolute ml-3' size={23}/>
                         <input required onChange={handleChange} name="name" value={recipe.name} type="text" placeholder='recipe name...' id="recipe-name" className='shadow-md shadow-slate-400 bg-slate-100 outline-0 border-[2px] rounded-lg border-slate-900 w-full h-10 px-10 text-black'/>

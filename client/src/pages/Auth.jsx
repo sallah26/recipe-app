@@ -83,17 +83,17 @@ const Auth = () => {
   };
 
   return (
-    <article className='min-w-full flex items-center justify-center min-h-[100vh] text-slate-800 dark:text-slate-100'>
+    <article className='w-full dark:bg-slate-800 flex items-center justify-center min-h-[100vh] text-slate-800 dark:text-slate-100'>
         {showRegistrationAlert && (
           <Alert success={true} message="Registration completed!! Now Login to your Account!" action="Okay tnx dude!" onConfirm={handleRegistrationAlertConfirm}/>
          )}{" "} 
           {showLoginAlert && (
           <Alert success={true} message="Boom! Login Successful!!" action="Pissay dude!" onConfirm={handleLoginAlertConfirm}/>
          )}{" "} 
-      <section>
+      <section className=''>
         {!showRegister ? (
           <>
-          <div className="min-w-[450px] border-[1px] rounded-2xl border-slate-500 shadow-lg shadow-slate-700 flex flex-col items-center justify-center p-4 gap-7">
+          <div className="w-full md:min-w-[450px] border-[1px] text-slate-800 dark:text-slate-100 rounded-2xl border-slate-500 shadow-lg shadow-slate-700 flex flex-col items-center justify-center p-4 gap-7">
             <p className='text-xl my-auto font-semibold'>Login With Your Username</p>
             <p className='text-[20px] text-red-600'>{err}</p>
             <form action="" className='flex flex-col w-full gap-4'>
@@ -121,7 +121,7 @@ const Auth = () => {
           </div></>
         ) : (
           // {/* Registration form */}{" "}
-          <div className="min-w-[500px] border-[1px] rounded-2xl border-slate-500 shadow-lg shadow-slate-700 flex flex-col items-center justify-center p-4 gap-7">
+          <div className="w-full md:min-w-[500px] mt-20 my-10 border-[1px] rounded-2xl border-slate-500 shadow-lg shadow-slate-700 flex flex-col items-center justify-center p-4 gap-7">
             <p className='text-xl font-semibold'>Register With Your Username and Password</p>
             <p className='text-[20px] text-rose-500'>{err}</p>
             <form action="" className='flex flex-col w-full gap-6 py-4'>
