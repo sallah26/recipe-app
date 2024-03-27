@@ -6,7 +6,7 @@ const Alert = ({ message, action, success, onConfirm, rating, rateValue }) => {
   const [show, setShow] = useState(false);
 
   const handleConfirm = () => {
-    setShow(true); // Show the alert
+    setShow(true); // Show the alert 
     onConfirm(); // Call the onConfirm function
   };
 
@@ -17,7 +17,7 @@ const Alert = ({ message, action, success, onConfirm, rating, rateValue }) => {
           <button className='absolute right-2 top-2 text-slate-800 dark:text-slate-200' onClick={()=>setShow(true)}><MdOutlineCancel size={30}/></button>
         )}
         <p className='text-2xl font-bold text-center'>{message}</p>
-        {rating && <Star val={rateValue} />}
+        {rating && <Star readOnly rating={rateValue} />}
         <button
           onClick={handleConfirm}
           className={`${success ? 'bg-green-500' : 'bg-red-500'} text-white p-2 px-16 m-5 rounded-lg`}

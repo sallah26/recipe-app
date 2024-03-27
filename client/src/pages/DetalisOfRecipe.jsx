@@ -21,7 +21,8 @@ const DetailsOfRecipe = () => {
   const userId = useGetUserId();
   const [showRateAlert, setShowRateAlert] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-  
+  const [rating, setRating] = useState(null);
+
 
   // For getting all of the recipes
   useEffect(() => { 
@@ -65,7 +66,6 @@ const DetailsOfRecipe = () => {
       });
   }, [id]);
 
-  const [rating, setRating] = useState(null);
 
   const handleRate = (newRating) => {
     setRating(newRating);
@@ -166,20 +166,25 @@ const DetailsOfRecipe = () => {
                   {recipe.username && <p className="flex gap-1 items-center">Created by : <span className="text-green-500 font-bold flex gap-1 items-center"><RiVerifiedBadgeFill  size={21}/>{recipe.username}</span></p>}
                   <div className="flex flex-col gap-1 py-4">
                       <p className="text-2xl font-semibold">Did you love it?</p>
-                      {recipe.rate > 0 && (<p className="text-[15px]">Based on {recipe.raters.length} users this recipe got {(recipe.rate / recipe.raters.length).toFixed(1)} Rate!</p>)}
+                      {/* <Star rating={rating} setRating={setRating} readOnly={false}/> */}
+                     {/* <button onClick={handleRateUpdating} className="h-8 px-5 rounded-md border-orange-500 bg-orange-700 text-white border-2">Rate</button> */}
+                      {/* {rating && (<p className='text-[15px] text-orange-700 dark:text-orange-400 '>{rating} stars selected!</p>)} */}
+                     {/*  */}
+                      {/* {recipe.rate > 0 && (<p className="text-[15px]">Based on {recipe.raters.length} users this recipe got {(recipe.rate / recipe.raters.length).toFixed(1)} Rate!</p>)}
                       <div className="flex gap-2 items-center ">
                           <Star onRate={handleRate} val={parseInt(recipe.rate / recipe.raters.length)}/>
                           <button disabled={doesRated} onClick={handleRateUpdating} className="h-8 px-5 rounded-md border-orange-500 bg-orange-700 text-white border-2">Rate</button>
                       </div>
-                      {rating && (<p className='text-[15px] text-orange-700 dark:text-orange-400 '>{rating} stars selected!</p>)}
+                      {rating && (<p className='text-[15px] text-orange-700 dark:text-orange-400 '>{rating} stars selected!</p>)} */}
                   </div>
                 </div>
-                {showRateAlert && (
+                {/* {showRateAlert && (
           <Alert success={true} message="Thanks For Rating us!" rating={true} rateValue={rating} action="It's Okay dude!" onConfirm={handleRatingAlertConfirm}/>
-         )}{" "}
+         )}{" "} */}
          {showDeleteAlert && (
           <Alert success={false} message="Are you sure to delete this recipe?" rating={false} action="Yeah Delete it dude!" onConfirm={handleConfirmDeleteRecipe}/>
          )}{" "}
+         {/* <Star readOnly={true} rateValue={rating} setRating={setRating} /> */}
               </div>
               <div className='w-full lg:w-1/2 flex flex-col gap-3'>
                 <img src={recipe.imgUrl} alt={`${recipe.name} icon`} className="rounded-3xl" />

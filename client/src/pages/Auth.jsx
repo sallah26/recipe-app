@@ -121,7 +121,7 @@ const Auth = () => {
           </div></>
         ) : (
           // {/* Registration form */}{" "}
-          <div className="w-full md:min-w-[500px] mt-20 my-10 border-[1px] rounded-2xl border-slate-500 shadow-lg shadow-slate-700 flex flex-col items-center justify-center p-4 gap-7">
+          <div className="w-full md:min-w-[500px] mt-20 md:mt-0 my-10 border-[1px] rounded-2xl border-slate-500 shadow-lg shadow-slate-700 flex flex-col items-center justify-center p-4 gap-7">
             <p className='text-xl font-semibold'>Register With Your Username and Password</p>
             <p className='text-[20px] text-rose-500'>{err}</p>
             <form action="" className='flex flex-col w-full gap-6 py-4'>
