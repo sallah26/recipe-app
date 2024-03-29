@@ -20,13 +20,14 @@ const Auth = () => {
   const [_, setCookies] = useCookies(["access_token"]);
   const [showRegistrationAlert, setShowRegistrationAlert] = useState(false);
   const [showLoginAlert, setShowLoginAlert] = useState(false);
+  const BACKEND_URL = "https://recipe-app-2-7haw.onrender.com";
 
   const handleRegistration = async (e) => {
     e.preventDefault();
     if (regPassword !== regConfirmPassword) return setErr("Passwords do not match!");
 
     try {
-      await axios.post("https://recipe-app-gr7f.onrender.com/auth/register", { regUsername, regPassword });
+      await axios.post(`${BACKEND_URL}/auth/register`, { regUsername, regPassword });
       // alert("Registration completed!");
         setShowRegistrationAlert(true)
         setErr("");
@@ -49,7 +50,7 @@ const Auth = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://recipe-app-gr7f.onrender.com/auth/login", { username, password });
+      const res = await axios.post(`${BACKEND_URL}/auth/login`, { username, password });
       setCookies("access_token", res.data.token);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userID', res.data.userId);

@@ -22,12 +22,13 @@ const DetailsOfRecipe = () => {
   const [showRateAlert, setShowRateAlert] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [rating, setRating] = useState(null);
+  const BACKEND_URL = "https://recipe-app-2-7haw.onrender.com";
 
 
   // For getting all of the recipes
   useEffect(() => { 
     setLoading(true)
-    axios.get('https://recipe-app-gr7f.onrender.com/recipe/')
+    axios.get(`${BACKEND_URL}/recipe/`)
     .then((res) => {
       setRecipes(res.data);
       
@@ -44,7 +45,7 @@ const DetailsOfRecipe = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://recipe-app-gr7f.onrender.com/recipe/${id}`)
+      .get(`${BACKEND_URL}/recipe/${id}`)
       .then((res) => {
         setRecipe(res.data);
         console.log(res.data);
@@ -85,7 +86,7 @@ const DetailsOfRecipe = () => {
     let CurrentRateScore = rateScore / raters.length;
     
     axios
-      .put(`https://recipe-app-gr7f.onrender.com/recipe/${id}`, {
+      .put(`${BACKEND_URL}/recipe/${id}`, {
         rate: rateScore,
         raters: raters
       })
@@ -119,7 +120,7 @@ const DetailsOfRecipe = () => {
   const handleConfirmDeleteRecipe = () =>{
       setLoading(true);
       setShowDeleteAlert(false);
-      axios.delete(`https://recipe-app-gr7f.onrender.com/recipe/${id}`)
+      axios.delete(`${BACKEND_URL}/recipe/${id}`)
        .then(()=> {
           setLoading(false);
           navigate("/")

@@ -22,12 +22,13 @@ const UpdateRecipe = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [err, setErr] = useState("");
+    const BACKEND_URL = "https://recipe-app-2-7haw.onrender.com";
 
 
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`https://recipe-app-gr7f.onrender.com/recipe/${id}`)
+            .get(`${BACKEND_URL}/recipe/${id}`)
             .then((res) => {
                 const { name, ingredients, cookingTime, imgUrl, instructions } = res.data;
                 setRecipe({
@@ -70,7 +71,7 @@ const UpdateRecipe = () => {
             return;
         }
         setLoading(true);
-        axios.put(`https://recipe-app-gr7f.onrender.com/recipe/${id}`, recipe)
+        axios.put(`${BACKEND_URL}/recipe/${id}`, recipe)
       
             .then((res) => {
                 alert("Recipe edited Successfully!");

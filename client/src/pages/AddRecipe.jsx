@@ -23,7 +23,7 @@ const AddRecipe = () => {
     const [err, setErr] = useState("");
     const [showAddAlert, setShowAddAlert] = useState(false);
     const navigate = useNavigate();
-   
+    const BACKEND_URL = "https://recipe-app-2-7haw.onrender.com";
     const handleChange = (e)=>{
         const {name, value} = e.target;
         setRecipe({...recipe, [name]: value})
@@ -66,7 +66,7 @@ const AddRecipe = () => {
         }else{
             // const AddRecipe = ()=>{
                 setLoading(true)
-                axios.post("https://recipe-app-gr7f.onrender.com/recipe", recipe)
+                axios.post(`${BACKEND_URL}/recipe`, recipe)
                 .then((res)=>{
                 setShowAddAlert(true);
                 setLoading(false)

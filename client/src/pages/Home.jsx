@@ -4,14 +4,17 @@ import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
 import hero_img from "../images/hero-img.png";
 
+
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
+  
+  const BACKEND_URL = "https://recipe-app-2-7haw.onrender.com";
 
   useEffect(() => {
     setLoading(true)
-    axios.get('https://recipe-app-gr7f.onrender.com/recipe')
+    axios.get(`${BACKEND_URL}/recipe`)
     .then((res) => {
       setRecipes(res.data)
       setLoading(false);
