@@ -66,7 +66,7 @@ const AddRecipe = () => {
         }else{
             // const AddRecipe = ()=>{
                 setLoading(true)
-                axios.post("http://localhost:5000/recipe", recipe)
+                axios.post("https://recipe-app-gr7f.onrender.com/recipe", recipe)
                 .then((res)=>{
                 setShowAddAlert(true);
                 setLoading(false)

@@ -27,7 +27,7 @@ const UpdateRecipe = () => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:5000/recipe/${id}`)
+            .get(`https://recipe-app-gr7f.onrender.com/recipe/${id}`)
             .then((res) => {
                 const { name, ingredients, cookingTime, imgUrl, instructions } = res.data;
                 setRecipe({
@@ -70,9 +70,8 @@ const UpdateRecipe = () => {
             return;
         }
         setLoading(true);
-        axios.put(`http://localhost:5000/recipe/${id}`, recipe)
+        axios.put(`https://recipe-app-gr7f.onrender.com/recipe/${id}`, recipe)
       
-        // axios.put("http://localhost:5000/recipe", recipe)
             .then((res) => {
                 alert("Recipe edited Successfully!");
                 setLoading(false);

@@ -26,7 +26,7 @@ const Auth = () => {
     if (regPassword !== regConfirmPassword) return setErr("Passwords do not match!");
 
     try {
-      await axios.post("http://localhost:5000/auth/register", { regUsername, regPassword });
+      await axios.post("https://recipe-app-gr7f.onrender.com/auth/register", { regUsername, regPassword });
       // alert("Registration completed!");
         setShowRegistrationAlert(true)
         setErr("");
@@ -49,7 +49,7 @@ const Auth = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/auth/login", { username, password });
+      const res = await axios.post("https://recipe-app-gr7f.onrender.com/auth/login", { username, password });
       setCookies("access_token", res.data.token);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userID', res.data.userId);

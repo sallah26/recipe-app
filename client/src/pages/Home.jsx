@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import Loading from "../components/Loading";
-import {useNavigate} from "react-router-dom";
-import hero_img from "../images/transparent-happy-face1.png";
-import Alert from '../components/Alert';
+import { useNavigate } from "react-router-dom";
+import hero_img from "../images/hero-img.png";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -13,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true)
-    axios.get('http://localhost:5000/recipe/')
+    axios.get('https://recipe-app-gr7f.onrender.com/recipe')
     .then((res) => {
       setRecipes(res.data)
       setLoading(false);
